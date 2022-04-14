@@ -93,16 +93,63 @@ module.exports.delete = (request, response) => {
       .catch(error => {
          if (error) {
             console.log(error);
-            response.status(500).send({message: 'Server error'})
+            response.status(500).send({message: 'Server error'});
          }
       })
 
 }
 
 
-module.exports.getWhole = (request, response) => {
+module.exports.get = (request, response) => {
+
+   const fileName = request.query.filename;
+   const filePath = path.join(storagePath, `/${fileName}.txt`);
+
+   if (!fileName) return response.status(400).send({message: 'No filename'});
+
+   checkFileExists.check(filePath)
+   .then(file => {
+      if (!file) {
+         response.status(400).send({message: 'File does not exist'});
+         throw null;
+      }
+      response.download(filePath);
+   })
+   .catch(error => {
+      if (error) {
+         console.log(error);
+         response.status(500).send({message: 'Server error'});
+      }
+   })
+
+
 }
 
 
 module.exports.getContent = (request, response) => {
+
+   const fileName = request.query.filename;
+   const filePath = path.join(storagePath, `/${fileName}.txt`);
+
+   if (!fileName) return response.status(400).send({message: 'No filename'});
+
+   checkFileExists.check(filePath)
+   .then(file => {
+      if (!file) {
+         response.status(400).send({message: 'File does not exist'});
+         throw null;
+      }
+      return fs.promises.readFile(filePath);
+   })
+   .then(data => {
+      fileContent = data.toString();
+      response.send(fileContent);
+   })
+   .catch(error => {
+      if (error) {
+         console.log(error);
+         response.status(500).send({message: 'Server error'});
+      }
+   })
+
 }

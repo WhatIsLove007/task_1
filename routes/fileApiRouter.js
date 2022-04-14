@@ -11,9 +11,9 @@ fileApiRouter.put('/:filename', urlEncodedParser, fileApiController.update);
 
 fileApiRouter.delete('/', fileApiController.delete);
 
-fileApiRouter.get('/get-whole', fileApiController.getWhole);
+fileApiRouter.get('/', fileApiController.get);
 
-fileApiRouter.get('/get-content', fileApiController.getContent);
+fileApiRouter.get('/content', fileApiController.getContent);
 
 
 
