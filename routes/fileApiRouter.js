@@ -7,9 +7,9 @@ const urlEncodedParser = express.urlencoded({extended: false})
 
 fileApiRouter.post('/', urlEncodedParser, fileApiController.create);
 
-fileApiRouter.put('/edit', fileApiController.edit);
+fileApiRouter.put('/:filename', urlEncodedParser, fileApiController.update);
 
-fileApiRouter.delete('/delete', fileApiController.delete);
+fileApiRouter.delete('/', fileApiController.delete);
 
 fileApiRouter.get('/get-whole', fileApiController.getWhole);
 
