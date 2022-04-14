@@ -1,0 +1,1 @@
+This folder is used to create/edit/delete files and folders

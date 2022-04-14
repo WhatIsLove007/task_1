@@ -1,0 +1,28 @@
+{
+  "name": "task_1",
+  "version": "1.0.0",
+  "description": "task",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WhatIsLove007/task_1"
+  },
+  "keywords": [
+    "node.js",
+    "express.js",
+    "task"
+  ],
+  "author": "Vladislav Nagorniy",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.3",
+    "hbs": "^4.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
