@@ -2,12 +2,14 @@ const express = require('express');
 const directoryRouter = express.Router();
 const directoryController = require('../controllers/directoryApiController');
 
+const urlEncodedParser = express.urlencoded({extended: false});
 
-directoryRouter.get('/create', directoryController.create);
 
-directoryRouter.get('/edit', directoryController.edit);
+directoryRouter.post('/', urlEncodedParser, directoryController.create);
 
-directoryRouter.get('/create', directoryController.delete);
+directoryRouter.put('/', urlEncodedParser, directoryController.update);
+
+directoryRouter.delete('/', directoryController.delete);
 
 
 module.exports = directoryRouter;

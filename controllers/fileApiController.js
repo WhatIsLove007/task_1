@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const checkFileExists = require('../models/checkPathExists')
+const checkPathExists = require('../models/checkPathExists')
 
 const storagePath = path.join(__dirname, '../storage');
 
@@ -15,7 +15,7 @@ module.exports.create = (request, response) => {
    if (!fileContent) return response.status(400).send({message: 'No file content'});
 
    
-   checkFileExists.check(filePath)
+   checkPathExists.check(filePath)
       .then(result => {
          if (result) {
             response.status(400).send({message: 'File already exists'});
@@ -48,7 +48,7 @@ module.exports.update = (request, response) => {
    const oldFilePath = path.join(storagePath, `${oldFileName}.txt`);
    const newFilePath = path.join(storagePath, `${newFileName}.txt`);
 
-   checkFileExists.check(oldFilePath)
+   checkPathExists.check(oldFilePath)
       .then(file => {
          if (!file) {
             response.status(400).send({message: 'File does not exist'});
@@ -79,7 +79,7 @@ module.exports.delete = (request, response) => {
 
    if (!filename) return response.status(400).send({message: 'No filename'});
 
-   checkFileExists.check(filePath)
+   checkPathExists.check(filePath)
       .then(file => {
          if (!file) {
             response.status(400).send({message: 'File does not exist'});
@@ -107,7 +107,7 @@ module.exports.get = (request, response) => {
 
    if (!fileName) return response.status(400).send({message: 'No filename'});
 
-   checkFileExists.check(filePath)
+   checkPathExists.check(filePath)
    .then(file => {
       if (!file) {
          response.status(400).send({message: 'File does not exist'});
@@ -133,7 +133,7 @@ module.exports.getContent = (request, response) => {
 
    if (!fileName) return response.status(400).send({message: 'No filename'});
 
-   checkFileExists.check(filePath)
+   checkPathExists.check(filePath)
    .then(file => {
       if (!file) {
          response.status(400).send({message: 'File does not exist'});
